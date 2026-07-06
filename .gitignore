@@ -1,7 +1,7 @@
 .env
 
-PROJECT_CONTEXT.md
-STATUS.md
+# PROJECT_CONTEXT.md
+# STATUS.md
 
 # Venvs
 .venv/
