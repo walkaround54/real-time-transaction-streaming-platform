@@ -1,1 +1,25 @@
 .env
+
+PROJECT_CONTEXT.md
+STATUS.md
+
+# Venvs
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# VS Code
+.vscode/
