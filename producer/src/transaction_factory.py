@@ -1,6 +1,7 @@
 from random import choice, randint, uniform
 from src.models import Transaction
 from dataclasses import dataclass
+from src.settings import CUSTOMER_COUNT
 
 @dataclass(frozen=True)
 class Merchant:
@@ -99,11 +100,11 @@ def generate_transaction_id(sequence_number: int) -> str:
 
 def generate_customer():
     """
-    Simulate 10,000 customers.
+    Simulate customers.
     Each customer owns exactly one account for now.
     """
 
-    customer_number = randint(1, 10_000)
+    customer_number = randint(1, CUSTOMER_COUNT)
 
     return {
         "customer_id": f"CUST{customer_number:08d}",
