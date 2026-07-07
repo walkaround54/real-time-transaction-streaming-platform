@@ -12,7 +12,6 @@ This file defines the engineering conventions for AI coding agents (ChatGPT, Cod
 ## Git Rules
 
 - Never commit directly to `main`.
-- Use `develop` as the integration branch.
 - Use feature branches.
 
 ## Branch Naming
@@ -42,3 +41,23 @@ Whenever architecture or functionality changes:
 ## Design Philosophy
 
 Build simple → Stream events → Add state → Detect fraud → Observe → Containerise → Deploy like production.
+
+## Assistance Guidelines
+
+When there is insufficient project context to complete a task accurately:
+
+1. Refer to the **Project Structure (Auto-generated)** section in `STATUS.md` to determine the project's current file and folder structure.
+2. Request only the specific files required for the current task. Do not guess or hallucinate file names or locations.
+3. Prefer requesting the smallest set of relevant files rather than the entire project.
+4. If a requested file is expected to exist according to the project structure but is missing, ask the user to provide it before proceeding.
+5. Base all architectural assumptions on the uploaded project files. Do not invent project structure, modules, or implementation details.
+
+## Project Continuity
+
+Treat this project as a long-lived software engineering project.
+
+- Preserve existing architecture unless there is a compelling engineering reason to change it.
+- Prefer incremental improvements over large refactors.
+- Follow the existing coding style and project conventions.
+- Do not rename or reorganize files unless explicitly requested or there is a clear engineering benefit.
+- Consider previous design decisions before proposing alternatives.
