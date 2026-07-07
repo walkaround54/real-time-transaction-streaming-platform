@@ -50,3 +50,53 @@ v0.2.0
 Blockers
 
 None.
+
+# Project Structure (Auto-generated)
+
+<!-- PROJECT_TREE_START -->
+```text
+real-time-transaction-streaming-platform
+├── .github
+├── docker-compose
+├── docs
+│   ├── architecture.md
+│   ├── deployment.md
+│   ├── end_to_end_architecture.png
+│   ├── flink.md
+│   ├── fraud-engine.md
+│   ├── kafka.md
+│   ├── observability.md
+│   ├── roadmap.md
+│   └── technologies.md
+├── flink-jobs
+├── kafka
+├── kubernetes
+├── observability
+├── producer
+│   ├── src
+│   │   ├── __init__.py
+│   │   ├── generator.py
+│   │   ├── logging_config.py
+│   │   ├── models.py
+│   │   ├── settings.py
+│   │   └── transaction_factory.py
+│   ├── tests
+│   │   ├── test_generator.py
+│   │   └── test_transaction_factory.py
+│   ├── __init__.py
+│   └── requirements.txt
+├── scripts
+│   ├── __init__.py
+│   ├── check.py
+│   └── update_project_tree.py
+├── .gitignore
+├── AGENTS.md
+├── all_info.md
+├── CONTRIBUTING.md
+├── PROJECT_CONTEXT.md
+├── README.md
+├── STATUS.md
+└── VERSIONING.md
+```
+
+<!-- PROJECT_TREE_END -->
