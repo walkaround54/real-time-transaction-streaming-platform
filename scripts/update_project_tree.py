@@ -1,7 +1,5 @@
 from pathlib import Path
 
-# Generates the tree structure for the project
-
 IGNORE_DIRS = {
     ".git",
     ".venv",
@@ -17,7 +15,7 @@ IGNORE_FILES = {
 }
 
 
-def build_tree(path: Path, prefix: str = "", lines=None):
+def build_tree(path: Path, prefix: str = "", lines: list[str] | None = None) -> list[str]:
     if lines is None:
         lines = []
 
@@ -32,7 +30,6 @@ def build_tree(path: Path, prefix: str = "", lines=None):
 
     for index, item in enumerate(items):
         connector = "└── " if index == len(items) - 1 else "├── "
-
         lines.append(prefix + connector + item.name)
 
         if item.is_dir():
@@ -41,25 +38,32 @@ def build_tree(path: Path, prefix: str = "", lines=None):
 
     return lines
 
-root = Path(__file__).resolve().parent.parent
 
-tree_lines = [root.name]
-tree_lines.extend(build_tree(root))
+def update_status_project_tree() -> None:
+    root = Path(__file__).resolve().parent.parent
+    status_file = root / "STATUS.md"
 
-tree_text = "\n".join(tree_lines)
+    start = "<!-- PROJECT_TREE_START -->"
+    end = "<!-- PROJECT_TREE_END -->"
 
-status_file = root / "STATUS.md"
+    content = status_file.read_text(encoding="utf-8")
 
-content = status_file.read_text(encoding="utf-8")
+    if start not in content or end not in content:
+        raise ValueError("STATUS.md must contain PROJECT_TREE_START and PROJECT_TREE_END markers.")
 
-start = "<!-- PROJECT_TREE_START -->"
-end = "<!-- PROJECT_TREE_END -->"
+    tree_lines = [root.name]
+    tree_lines.extend(build_tree(root))
+    tree_text = "\n".join(tree_lines)
 
-before = content.split(start)[0] + start + "\n"
-after = "\n" + end + content.split(end)[1]
+    before = content.split(start)[0] + start + "\n"
+    after = "\n" + end + content.split(end)[1]
 
-updated = before + "```text\n" + tree_text + "\n```\n" + after
+    updated = before + "```text\n" + tree_text + "\n```\n" + after
 
-status_file.write_text(updated, encoding="utf-8")
+    status_file.write_text(updated, encoding="utf-8")
 
-print("STATUS.md updated.")
+    print("STATUS.md updated.")
+
+
+if __name__ == "__main__":
+    update_status_project_tree()

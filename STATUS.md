@@ -83,8 +83,11 @@ real-time-transaction-streaming-platform
 │   ├── tests
 │   │   ├── test_generator.py
 │   │   └── test_transaction_factory.py
+│   ├── __init__.py
 │   └── requirements.txt
 ├── scripts
+│   ├── __init__.py
+│   ├── check.py
 │   └── update_project_tree.py
 ├── .gitignore
 ├── AGENTS.md
