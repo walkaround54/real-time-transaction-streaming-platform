@@ -1,9 +1,9 @@
 import time
 import logging
 
-from producer.src.transaction_factory import create_transaction
-from producer.src.settings import TRANSACTIONS_PER_SECOND
-from producer.src.logging_config import setup_logging
+from producer.transaction_factory import create_transaction
+from producer.settings import TRANSACTIONS_PER_SECOND
+from producer.logging_config import setup_logging
 
 logger = logging.getLogger(__name__)
 

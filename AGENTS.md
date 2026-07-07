@@ -42,6 +42,23 @@ Whenever architecture or functionality changes:
 
 Build simple → Stream events → Add state → Detect fraud → Observe → Containerise → Deploy like production.
 
+# Learning Mode
+
+Unless the user explicitly asks for the complete solution, adopt a guided mentoring approach.
+
+Preferred teaching style:
+
+1. Explain the objective.
+2. Ask questions that lead the user toward the solution.
+3. Encourage the user to reason before providing code.
+4. Review the user's implementation.
+5. Explain improvements and engineering trade-offs.
+6. Reveal the final production-quality solution only after the user has attempted it.
+
+The objective is to maximise understanding rather than minimise time to completion.
+
+Assume the user wants to become a stronger software engineer, not merely complete the task.
+
 ## Assistance Guidelines
 
 When there is insufficient project context to complete a task accurately:

@@ -10,6 +10,23 @@ The objective is to learn modern data engineering by designing, implementing and
 
 ---
 
+## Learning Philosophy
+
+This project is intentionally educational.
+
+The primary objective is understanding modern data engineering practices rather than completing features quickly.
+
+When introducing new technologies:
+
+- Build concepts incrementally.
+- Encourage reasoning before implementation.
+- Prefer questions over direct answers.
+- Review and improve user-written code.
+- Explain why production engineers make certain design decisions.
+- Avoid providing full solutions before the user has attempted the task.
+
+Treat each phase as a learning milestone rather than a coding exercise.
+
 # Current Project Status
 
 Current Version
@@ -99,36 +116,30 @@ Console Output (JSON)
 
 Current application consists of a single producer that continuously generates realistic financial transaction events.
 
----
-
-# Repository Structure
+The producer is packaged using a standard Python src layout:
 
 ```text
 producer/
-│
+├── pyproject.toml
+├── Dockerfile
 ├── src/
-│   ├── __init__.py
-│   ├── generator.py
-│   ├── logging_config.py
-│   ├── models.py
-│   ├── settings.py
-│   └── transaction_factory.py
-│
-├── tests/
-│   ├── test_generator.py
-│   └── test_transaction_factory.py
-│
-└── requirements.txt
+│   └── producer/
+│       ├── __init__.py
+│       ├── generator.py
+│       ├── logging_config.py
+│       ├── models.py
+│       ├── settings.py
+│       └── transaction_factory.py
+└── tests/
+    ├── test_generator.py
+    └── test_transaction_factory.py
 ```
 
-Future directories already exist:
+The runtime Docker image is intended to contain only the producer application code and its runtime dependencies, not the test suite.
 
-- kafka/
-- flink-jobs/
-- docker-compose/
-- kubernetes/
-- observability/
-- docs/
+---
+
+Refer to STATUS.md for existing Project Tree structure.
 
 ---
 
@@ -155,6 +166,12 @@ Producer
 - Application settings
 - Structured logging
 - Unit tests
+
+Packaging / Build
+
+- pyproject.toml-based Python packaging
+- Runtime-only Docker approach for the producer
+- Service-local build context convention
 
 ---
 
@@ -198,16 +215,21 @@ Testing
 - Pytest.
 - Factory and generator unit tests.
 
+Packaging
+
+- pyproject.toml is the source of truth for producer packaging metadata and dependencies.
+- The package follows a src layout.
+- Imports should use the package name, for example producer.generator.
+
 ---
 
 # Upcoming Milestones
 
 Phase 2
 
-- Dockerfile
-- Containerised producer
-- Docker Compose
-- Verify application runs inside Docker
+- Finish Docker image for the producer
+- Verify generator runs inside Docker
+- Add Docker Compose for local development if needed
 
 Phase 3
 
