@@ -31,15 +31,15 @@ Treat each phase as a learning milestone rather than a coding exercise.
 
 Current Version
 
-v0.1.0
+v0.2.0
 
 Current Milestone
 
-Phase 2 – Docker Environment
+Phase 3 - Kafka Producer
 
 Current Feature
 
-Containerising the Python Transaction Producer
+Building the Kafka Producer and messaging layer
 
 ---
 
@@ -49,21 +49,21 @@ Build the platform incrementally.
 
 ```text
 Build simple
-        ↓
+        ->
 Generate realistic data
-        ↓
+        ->
 Containerise
-        ↓
+        ->
 Stream events
-        ↓
+        ->
 Process events
-        ↓
+        ->
 Maintain state
-        ↓
+        ->
 Detect fraud
-        ↓
+        ->
 Observe the platform
-        ↓
+        ->
 Deploy like production
 ```
 
@@ -103,20 +103,20 @@ Whenever architecture or behaviour changes:
 
 ```text
 Transaction Generator
-        │
-        ▼
+        |
+        v
 Transaction Factory
-        │
-        ▼
+        |
+        v
 Transaction Model
-        │
-        ▼
+        |
+        v
 Console Output (JSON)
 ```
 
 Current application consists of a single producer that continuously generates realistic financial transaction events.
 
-The producer is packaged using a standard Python src layout:
+The producer is packaged using a standard Python src layout and a verified Docker runtime image:
 
 ```text
 producer/
@@ -135,7 +135,7 @@ producer/
     └── test_transaction_factory.py
 ```
 
-The runtime Docker image is intended to contain only the producer application code and its runtime dependencies, not the test suite.
+The runtime Docker image contains only the producer application code and its runtime dependencies, not the test suite.
 
 ---
 
@@ -172,6 +172,7 @@ Packaging / Build
 - pyproject.toml-based Python packaging
 - Runtime-only Docker approach for the producer
 - Service-local build context convention
+- Dockerized producer image verified with `docker run`
 
 ---
 
@@ -224,12 +225,6 @@ Packaging
 ---
 
 # Upcoming Milestones
-
-Phase 2
-
-- Finish Docker image for the producer
-- Verify generator runs inside Docker
-- Add Docker Compose for local development if needed
 
 Phase 3
 

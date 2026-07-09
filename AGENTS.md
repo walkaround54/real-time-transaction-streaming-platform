@@ -61,6 +61,7 @@ When the user asks to update `STATUS.md`, `PROJECT_CONTEXT.md`, or `CHANGELOG.md
 - Update `Current Phase` when the project moves forward.
 - Update `Current Work` to reflect the active task.
 - Update `Phase X Task Completion Status` as tasks are completed.
+- If Phase is already completed i.e listed under # Previous Phases Task Completion, see that under Current Work the completed phase is no longer there.
 - Append previously completed phases to `Previous Phases Task Completion` if they are not already listed.
 - Do not change "# Project Structure (Auto-generated)" section; leave that to `scripts/update_project_tree.py`.
 

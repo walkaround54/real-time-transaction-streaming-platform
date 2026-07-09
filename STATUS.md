@@ -2,7 +2,7 @@
 
 Current Version
 
-v0.1.0
+v0.2.0
 
 Current Branch
 
@@ -10,46 +10,42 @@ feature/docker-environment
 
 ### Current Phase
 
-Phase 2 – Docker Environment
+Phase 3 - Kafka Producer
 
 ### Current Work
 
-Containerising the Python Transaction Producer
+Building the Kafka Producer and messaging layer
 
-### Phase 2 Task Completion Status
+#### Phase 3 Task Completion Status
 
-1. Finalise the producer Dockerfile ✅
-2. Verify the producer runs inside Docker
-3. Add Docker Compose for local development if needed 
-4. Keep tests outside the runtime image ✅
+1. Define the Kafka producer integration
+2. Send simulated transactions to `transactions_raw`
+3. Add basic local verification for message delivery
 
 # Previous Phases Task Completion
 
 ### Phase 1 Tasks:
 
-✅ Repository setup
+1. Repository setup
+2. GitHub Flow
+3. Documentation
+4. Transaction model
+5. Transaction factory
+6. Continuous transaction generator
+7. Application settings
+8. Logging
+9. Unit tests
+10. `pyproject.toml`-based packaging
 
-✅ GitHub Flow
+### Phase 2 Tasks:
 
-✅ Documentation
-
-✅ Transaction model
-
-✅ Transaction factory
-
-✅ Continuous transaction generator
-
-✅ Application settings
-
-✅ Logging
-
-✅ Unit tests
-
-✅ `pyproject.toml`-based packaging
+1. Finalise the producer Dockerfile
+2. Verify the producer runs inside Docker
+3. Keep tests outside the runtime image
 
 Target Release
 
-v0.2.0
+v0.3.0
 
 Blockers
 
@@ -58,6 +54,7 @@ None.
 # Project Structure (Auto-generated)
 
 <!-- PROJECT_TREE_START -->
+```text
 real-time-transaction-streaming-platform
 ├── .github
 ├── docker-compose
@@ -77,22 +74,20 @@ real-time-transaction-streaming-platform
 ├── observability
 ├── producer
 │   ├── src
-│   │   └── producer
-│   │       ├── __init__.py
-│   │       ├── generator.py
-│   │       ├── logging_config.py
-│   │       ├── models.py
-│   │       ├── settings.py
-│   │       └── transaction_factory.py
+│   │   ├── __init__.py
+│   │   ├── generator.py
+│   │   ├── logging_config.py
+│   │   ├── models.py
+│   │   ├── settings.py
+│   │   └── transaction_factory.py
 │   ├── tests
 │   │   ├── test_generator.py
 │   │   └── test_transaction_factory.py
-│   ├── .dockerignore
-│   ├── Dockerfile
-│   └── pyproject.toml
+│   ├── __init__.py
+│   └── requirements.txt
 ├── scripts
 │   ├── __init__.py
-│   ├── test_python_services.py
+│   ├── check.py
 │   └── update_project_tree.py
 ├── .gitignore
 ├── AGENTS.md
