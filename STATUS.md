@@ -74,20 +74,22 @@ real-time-transaction-streaming-platform
 ├── observability
 ├── producer
 │   ├── src
-│   │   ├── __init__.py
-│   │   ├── generator.py
-│   │   ├── logging_config.py
-│   │   ├── models.py
-│   │   ├── settings.py
-│   │   └── transaction_factory.py
+│   │   └── producer
+│   │       ├── __init__.py
+│   │       ├── generator.py
+│   │       ├── logging_config.py
+│   │       ├── models.py
+│   │       ├── settings.py
+│   │       └── transaction_factory.py
 │   ├── tests
 │   │   ├── test_generator.py
 │   │   └── test_transaction_factory.py
-│   ├── __init__.py
-│   └── requirements.txt
+│   ├── .dockerignore
+│   ├── Dockerfile
+│   └── pyproject.toml
 ├── scripts
 │   ├── __init__.py
-│   ├── check.py
+│   ├── test_python_services.py
 │   └── update_project_tree.py
 ├── .gitignore
 ├── AGENTS.md
