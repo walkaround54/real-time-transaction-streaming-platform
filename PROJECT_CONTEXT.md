@@ -240,7 +240,7 @@ Phase 5
 
 Phase 6
 
-- Stateful stream processing
+- Stateful stream processing with RocksDB
 
 Phase 7
 
