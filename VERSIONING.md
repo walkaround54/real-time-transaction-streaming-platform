@@ -18,7 +18,3 @@ MAJOR.MINOR.PATCH
 | v0.6.0 | Observability |
 | v0.7.0 | Docker Compose |
 | v1.0.0 | Kubernetes Production Deployment |
-
-## Release Flow
-
-feature/* → develop → release/vX.Y.Z → main → Git Tag

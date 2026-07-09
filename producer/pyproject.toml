@@ -1,0 +1,18 @@
+[project]
+name = "transaction-producer"
+version = "0.1.0"
+dependencies = [
+    "pydantic",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"

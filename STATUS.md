@@ -2,50 +2,50 @@
 
 Current Version
 
-v0.1.0
+v0.2.0
 
 Current Branch
 
-main
+feature/docker-environment
 
-Current Phase
+### Current Phase
 
-Phase 1 – Python Transaction Generator
+Phase 3 - Kafka Producer
 
-Completed
+### Current Work
 
-✅ Repository setup
+Building the Kafka Producer and messaging layer
 
-✅ GitHub Flow
+#### Phase 3 Task Completion Status
 
-✅ Documentation
+1. Define the Kafka producer integration
+2. Send simulated transactions to `transactions_raw`
+3. Add basic local verification for message delivery
 
-✅ Transaction model
+# Previous Phases Task Completion
 
-✅ Transaction factory
+### Phase 1 Tasks:
 
-✅ Continuous transaction generator
+1. Repository setup
+2. GitHub Flow
+3. Documentation
+4. Transaction model
+5. Transaction factory
+6. Continuous transaction generator
+7. Application settings
+8. Logging
+9. Unit tests
+10. `pyproject.toml`-based packaging
 
-✅ Application settings
+### Phase 2 Tasks:
 
-✅ Logging
-
-✅ Unit tests
-
-Current Work
-
-⬜ Phase 2 – Docker Environment
-
-Next Tasks
-
-1. Containerise the producer
-2. Create Dockerfile
-3. Docker Compose for local development
-4. Verify generator runs inside Docker
+1. Finalise the producer Dockerfile
+2. Verify the producer runs inside Docker
+3. Keep tests outside the runtime image
 
 Target Release
 
-v0.2.0
+v0.3.0
 
 Blockers
 
@@ -74,24 +74,27 @@ real-time-transaction-streaming-platform
 ├── observability
 ├── producer
 │   ├── src
-│   │   ├── __init__.py
-│   │   ├── generator.py
-│   │   ├── logging_config.py
-│   │   ├── models.py
-│   │   ├── settings.py
-│   │   └── transaction_factory.py
+│   │   └── producer
+│   │       ├── __init__.py
+│   │       ├── generator.py
+│   │       ├── logging_config.py
+│   │       ├── models.py
+│   │       ├── settings.py
+│   │       └── transaction_factory.py
 │   ├── tests
 │   │   ├── test_generator.py
 │   │   └── test_transaction_factory.py
-│   ├── __init__.py
-│   └── requirements.txt
+│   ├── .dockerignore
+│   ├── Dockerfile
+│   └── pyproject.toml
 ├── scripts
 │   ├── __init__.py
-│   ├── check.py
+│   ├── test_python_services.py
 │   └── update_project_tree.py
 ├── .gitignore
 ├── AGENTS.md
 ├── all_info.md
+├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── PROJECT_CONTEXT.md
 ├── README.md

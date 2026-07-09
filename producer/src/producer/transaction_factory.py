@@ -1,7 +1,7 @@
 from random import choice, randint, uniform
-from producer.src.models import Transaction
+from producer.models import Transaction
 from dataclasses import dataclass
-from producer.src.settings import CUSTOMER_COUNT
+from producer.settings import CUSTOMER_COUNT
 
 @dataclass(frozen=True)
 class Merchant:

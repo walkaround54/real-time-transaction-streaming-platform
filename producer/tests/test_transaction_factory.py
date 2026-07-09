@@ -1,4 +1,4 @@
-from producer.src.transaction_factory import create_transaction
+from producer.transaction_factory import create_transaction
 
 def test_create_transaction_returns_valid_transaction():
     transaction = create_transaction(1)

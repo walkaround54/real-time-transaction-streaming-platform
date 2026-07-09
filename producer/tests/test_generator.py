@@ -1,4 +1,4 @@
-from producer.src.generator import generate_one_transaction
+from producer.generator import generate_one_transaction
 
 def test_generate_one_transaction():
     transaction = generate_one_transaction(1)
