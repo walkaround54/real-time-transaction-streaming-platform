@@ -58,7 +58,6 @@ None.
 # Project Structure (Auto-generated)
 
 <!-- PROJECT_TREE_START -->
-```text
 real-time-transaction-streaming-platform
 ├── .github
 ├── docker-compose
@@ -98,6 +97,7 @@ real-time-transaction-streaming-platform
 ├── .gitignore
 ├── AGENTS.md
 ├── all_info.md
+├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── PROJECT_CONTEXT.md
 ├── README.md

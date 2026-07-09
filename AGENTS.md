@@ -38,6 +38,40 @@ Whenever architecture or functionality changes:
 - Update docs/ for technical details.
 - Update CHANGELOG for releases.
 
+## Documentation Preservation Rules
+
+- Preserve all existing content unless a change is explicitly requested.
+- Update only the sections related to the current task.
+- Do not remove historical context from `STATUS.md`, `PROJECT_CONTEXT.md`, or `CHANGELOG.md`.
+- Prefer append-only updates for `CHANGELOG.md`.
+- If a change would delete or substantially rewrite existing documentation, pause and ask first.
+- Never rewrite an entire document unless explicitly requested.
+
+### `PROJECT_CONTEXT.md`
+
+- Update `Current Project Status` when the current phase is complete or has clearly advanced.
+- Append to `Current Architecture` when a new completed component changes the system shape.
+- Append to `Completed Features` when a feature or capability is finished.
+- Remove completed items from `Upcoming Milestones` only after they are fully delivered.
+- Keep the broader project narrative, learning philosophy, and historical context intact.
+
+### `STATUS.md`
+
+- Update `Current Phase` when the project moves forward.
+- Update `Current Work` to reflect the active task.
+- Update `Phase X Task Completion Status` as tasks are completed.
+- Append previously completed phases to `Previous Phases Task Completion` if they are not already listed.
+- Do not change "# Project Structure (Auto-generated)" section; leave that to `scripts/update_project_tree.py`.
+
+### `CHANGELOG.md`
+
+- Treat the changelog as append-only.
+- Align changelog entries with `VERSIONING.md`'s `## Planned Milestones` section and the current release line.
+- Keep older entries intact.
+- Use the milestone version from `VERSIONING.md` as the changelog heading for each release entry.
+- Use concise release notes that summarize what changed, why it mattered, and any notable follow-up work.
+- If the current work is not yet a release, do not create a new changelog version entry prematurely.
+
 ## Design Philosophy
 
 Build simple → Stream events → Add state → Detect fraud → Observe → Containerise → Deploy like production.
