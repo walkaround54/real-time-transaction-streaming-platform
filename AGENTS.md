@@ -38,8 +38,9 @@ Whenever architecture or functionality changes:
 - Update docs/ for technical details.
 - Update CHANGELOG for releases.
 
-## Documentation Preservation Rules
+## Documentation Update Trigger and Preservation Rules
 
+When the user asks to update `STATUS.md`, `PROJECT_CONTEXT.md`, or `CHANGELOG.md`:
 - Preserve all existing content unless a change is explicitly requested.
 - Update only the sections related to the current task.
 - Do not remove historical context from `STATUS.md`, `PROJECT_CONTEXT.md`, or `CHANGELOG.md`.
@@ -66,9 +67,10 @@ Whenever architecture or functionality changes:
 ### `CHANGELOG.md`
 
 - Treat the changelog as append-only.
-- Align changelog entries with `VERSIONING.md`'s `## Planned Milestones` section and the current release line.
+- Use `VERSIONING.md` as the source of truth for release versions.
+- Create one changelog entry per actual release, not per commit.
+- Use the corresponding milestone version from `VERSIONING.md` as the release heading.
 - Keep older entries intact.
-- Use the milestone version from `VERSIONING.md` as the changelog heading for each release entry.
 - Use concise release notes that summarize what changed, why it mattered, and any notable follow-up work.
 - If the current work is not yet a release, do not create a new changelog version entry prematurely.
 
