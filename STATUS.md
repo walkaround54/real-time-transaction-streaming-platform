@@ -85,12 +85,14 @@ real-time-transaction-streaming-platform
 │   │   └── producer
 │   │       ├── __init__.py
 │   │       ├── generator.py
+│   │       ├── kafka_client.py
 │   │       ├── logging_config.py
 │   │       ├── models.py
 │   │       ├── settings.py
 │   │       └── transaction_factory.py
 │   ├── tests
 │   │   ├── test_generator.py
+│   │   ├── test_kafka_client.py
 │   │   └── test_transaction_factory.py
 │   ├── .dockerignore
 │   ├── Dockerfile
@@ -104,6 +106,7 @@ real-time-transaction-streaming-platform
 ├── all_info.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
+├── kafka-logs.txt
 ├── PROJECT_CONTEXT.md
 ├── README.md
 ├── STATUS.md
