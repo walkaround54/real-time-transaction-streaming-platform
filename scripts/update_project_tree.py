@@ -10,6 +10,10 @@ IGNORE_DIRS = {
     ".vscode",
 }
 
+IGNORE_DIR_SUFFIXES = {
+    ".egg-info",
+}
+
 IGNORE_FILES = {
     ".DS_Store",
 }
@@ -26,6 +30,7 @@ def build_tree(path: Path, prefix: str = "", lines: list[str] | None = None) -> 
         for item in items
         if item.name not in IGNORE_DIRS
         and item.name not in IGNORE_FILES
+        and not any(item.name.endswith(suffix) for suffix in IGNORE_DIR_SUFFIXES)
     ]
 
     for index, item in enumerate(items):

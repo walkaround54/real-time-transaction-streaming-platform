@@ -39,7 +39,7 @@ Phase 3 - Kafka Producer
 
 Current Feature
 
-Building the Kafka Producer and messaging layer
+Connecting the Python producer to Kafka and publishing transaction events
 
 ---
 
@@ -137,6 +137,8 @@ producer/
 
 The runtime Docker image contains only the producer application code and its runtime dependencies, not the test suite.
 
+Kafka is now available locally through Docker Compose in KRaft mode, with a one-shot topic setup service that creates `transactions_raw` during startup.
+
 ---
 
 Refer to STATUS.md for existing Project Tree structure.
@@ -173,6 +175,8 @@ Packaging / Build
 - Runtime-only Docker approach for the producer
 - Service-local build context convention
 - Dockerized producer image verified with `docker run`
+- Kafka broker running successfully in KRaft mode
+- Topic provisioning for `transactions_raw` verified via Compose startup
 
 ---
 

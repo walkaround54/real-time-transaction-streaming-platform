@@ -1,8 +1,5 @@
 .env
 
-# PROJECT_CONTEXT.md
-# STATUS.md
-
 # Venvs
 .venv/
 venv/
@@ -23,3 +20,5 @@ Thumbs.db
 
 # VS Code
 .vscode/
+
+*.egg-info/

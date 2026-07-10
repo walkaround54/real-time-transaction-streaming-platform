@@ -3,6 +3,7 @@ name = "transaction-producer"
 version = "0.1.0"
 dependencies = [
     "pydantic",
+    "confluent-kafka",
 ]
 
 [project.optional-dependencies]
