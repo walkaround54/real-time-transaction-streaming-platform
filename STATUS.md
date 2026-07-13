@@ -6,15 +6,24 @@ v0.3.0
 
 Current Branch
 
-feature/docker-environment
+feature/kafka-cluster
 
 ### Current Phase
 
-Phase 4 - Apache Kafka cluster
+Phase 4 - Streaming concepts
 
 ### Current Work
 
-Preparing the Apache Kafka cluster milestone after completing and verifying the Kafka producer
+Define the streaming concepts and processing contract that will guide the first Apache Flink job
+
+# Phase 4 Task Completion Status
+
+1. Document event time and processing time for transaction events
+2. Define the initial windowing approach for transaction metrics
+3. Define a watermark and late-event handling policy
+4. Practise consumer groups, offsets, and replay with `transactions_raw`
+5. Document checkpointing, delivery guarantees, and backpressure concepts
+6. Define the input and output contract for the first Flink job
 
 # Previous Phases Task Completion
 
@@ -49,7 +58,7 @@ Preparing the Apache Kafka cluster milestone after completing and verifying the 
 
 Target Release
 
-v0.4.0
+v0.4.0 - First Flink processing job, after Phase 4 learning and design work
 
 Blockers
 

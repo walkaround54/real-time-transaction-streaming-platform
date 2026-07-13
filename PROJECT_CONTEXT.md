@@ -35,11 +35,11 @@ v0.3.0
 
 Current Milestone
 
-Phase 4 - Apache Kafka cluster
+Phase 4 - Streaming concepts
 
 Current Feature
 
-Kafka publishing from the Python producer into `transactions_raw` has been implemented and verified locally
+Define the streaming concepts and processing contract required before implementing the first Apache Flink job
 
 ---
 
@@ -238,13 +238,9 @@ Packaging
 
 # Upcoming Milestones
 
-Phase 3
-
-- Kafka Producer
-
 Phase 4
 
-- Apache Kafka cluster
+- Streaming concepts: event time, watermarks, windows, late events, checkpointing, delivery guarantees, and backpressure
 
 Phase 5
 

@@ -171,6 +171,29 @@ Before building Flink jobs, understand the main streaming concepts.
 
 These concepts are more important than the syntax of any single framework.
 
+### Build
+
+Create and document the processing contract for the first Flink job before writing the job itself.
+
+The contract should define:
+
+- `event_time` as the event-time field and UTC as its time zone
+- the difference between event time and processing time in this platform
+- a one-minute tumbling window for the initial transaction metrics
+- an initial out-of-order tolerance and the handling of records that arrive after the watermark
+- how Kafka consumer groups, offsets, and replay support recovery and reprocessing
+- the difference between Kafka producer idempotence and Flink end-to-end exactly-once processing
+- how consumer lag and backpressure appear when processing cannot keep up with production
+
+### Exit Criteria
+
+- The concepts are documented against the existing `transactions_raw` topic.
+- A named consumer group has been used to inspect offsets and replay records.
+- The initial Flink input, output, keying, window, and late-event decisions are recorded.
+- The first Flink job can begin without revisiting the event-time and delivery assumptions.
+
+Refer to [Streaming Concepts](streaming-concepts.md) for the Phase 4 learning guide.
+
 ## Phase 5 — Real-Time Processing with Flink Java
 
 ### Goal
