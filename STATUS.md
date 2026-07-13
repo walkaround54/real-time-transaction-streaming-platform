@@ -2,7 +2,7 @@
 
 Current Version
 
-v0.2.0
+v0.3.0
 
 Current Branch
 
@@ -10,17 +10,11 @@ feature/docker-environment
 
 ### Current Phase
 
-Phase 3 - Kafka Producer
+Phase 4 - Apache Kafka cluster
 
 ### Current Work
 
-Building the Kafka Producer and messaging layer
-
-#### Phase 3 Task Completion Status
-
-1. Define the Kafka producer integration
-2. Send simulated transactions to `transactions_raw`
-3. Add basic local verification for message delivery
+Preparing the Apache Kafka cluster milestone after completing and verifying the Kafka producer
 
 # Previous Phases Task Completion
 
@@ -43,9 +37,19 @@ Building the Kafka Producer and messaging layer
 2. Verify the producer runs inside Docker
 3. Keep tests outside the runtime image
 
+### Phase 3 Tasks:
+
+1. Define the Kafka producer integration
+2. Send simulated transactions to `transactions_raw`
+3. Add basic local verification for message delivery
+4. Start Kafka in KRaft mode with Docker Compose
+5. Create `transactions_raw` via a one-shot topic setup service
+6. Verify the broker and topic setup startup successfully
+7. Verify the producer publishes to `transactions_raw`
+
 Target Release
 
-v0.3.0
+v0.4.0
 
 Blockers
 
@@ -56,8 +60,10 @@ None.
 <!-- PROJECT_TREE_START -->
 ```text
 real-time-transaction-streaming-platform
+├── .agents
 ├── .github
-├── docker-compose
+├── compose
+│   └── kafka.yml
 ├── docs
 │   ├── architecture.md
 │   ├── deployment.md
@@ -77,12 +83,14 @@ real-time-transaction-streaming-platform
 │   │   └── producer
 │   │       ├── __init__.py
 │   │       ├── generator.py
+│   │       ├── kafka_client.py
 │   │       ├── logging_config.py
 │   │       ├── models.py
 │   │       ├── settings.py
 │   │       └── transaction_factory.py
 │   ├── tests
 │   │   ├── test_generator.py
+│   │   ├── test_kafka_client.py
 │   │   └── test_transaction_factory.py
 │   ├── .dockerignore
 │   ├── Dockerfile
@@ -96,6 +104,7 @@ real-time-transaction-streaming-platform
 ├── all_info.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
+├── kafka-logs.txt
 ├── PROJECT_CONTEXT.md
 ├── README.md
 ├── STATUS.md

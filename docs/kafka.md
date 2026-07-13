@@ -4,6 +4,8 @@
 
 Apache Kafka is the messaging layer for the platform. It ingests simulated financial transaction events, stores them in topics, allows replay from offsets, and decouples producers from downstream Flink processing jobs.
 
+For this project, Kafka should be run locally in **KRaft mode** rather than ZooKeeper mode. That keeps the initial setup smaller and matches the modern Kafka direction.
+
 ## Core Concepts to Learn
 
 - Broker
@@ -31,6 +33,23 @@ flowchart LR
     E --> I[transactions_kpi]
 ```
 
+## Local Kafka Setup
+
+Use a single Kafka broker in KRaft mode for the first implementation.
+
+Recommended local shape:
+
+- one Kafka broker
+- no ZooKeeper
+- one application topic: `transactions_raw`
+- optional Kafka UI for inspection
+
+The first verification target has now been completed:
+
+```text
+Python producer -> transactions_raw -> consumer check
+```
+
 ## Final Kafka Topics
 
 | Topic | Purpose |
@@ -45,7 +64,7 @@ flowchart LR
 
 This is the primary ingestion topic.
 
-It receives simulated financial transaction events from the Python producer.
+It receives simulated financial transaction events from the Python producer without requiring changes to the producer's transaction model or generator logic.
 
 Example event:
 
@@ -126,14 +145,14 @@ Events should be routed here if:
 
 ## Producer Design
 
-The Python producer should eventually:
+The existing Python producer should be able to:
 
 - Generate realistic transaction events
-- Support configurable event rate
-- Support normal and suspicious scenarios
+- Keep its current `Transaction` model and generator behavior
 - Write events to `transactions_raw`
 - Log sent events
-- Expose producer metrics where possible
+
+Kafka-specific concerns should stay outside the core generator code where possible. Prefer adding a small Kafka publishing layer or adapter rather than reshaping the working producer internals.
 
 ## Consumer Design
 
@@ -158,6 +177,37 @@ As the project matures, improve topic design with:
 - Avro or Protobuf
 - Schema Registry
 - Replay testing
+
+## Recommendation For This Repo
+
+For the current `v0.3.0` milestone:
+
+- use KRaft
+- keep the producer code stable
+- add Kafka publishing around the existing transaction output
+- verify delivery with a consumer before moving on to Flink
+
+The producer-to-`transactions_raw` path has now been implemented and locally verified, so the Kafka milestone can be treated as complete for this phase of the project.
+
+## Where RocksDB Fits
+
+RocksDB is not part of the Kafka broker or the Kafka producer milestone.
+
+Kafka stores event logs in topics so downstream systems can consume and replay events. RocksDB will be introduced later as the Flink state backend for customer-level fraud detection logic.
+
+Use RocksDB when the platform needs memory across multiple events, such as:
+
+- rolling customer spend over a time window
+- repeated failed transaction counts
+- transaction velocity per customer
+- previous transaction country
+- historical average transaction amount
+
+The first Kafka milestone should stay focused on this flow:
+
+```text
+Python producer -> transactions_raw -> consumer check
+```
 
 ## Recommended Initial Topics
 

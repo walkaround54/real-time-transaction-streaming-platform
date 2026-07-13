@@ -25,30 +25,17 @@
 | Orchestration | Kubernetes |
 | Monitoring | Prometheus, Grafana |
 
-## Repository Structure
-
-```text
-README.md
-CONTRIBUTING.md
-VERSIONING.md
-CHANGELOG.md
-AGENTS.md
-docs/
-producer/
-flink-jobs/
-kafka/
-docker-compose/
-kubernetes/
-observability/
-```
-
 ## Documentation
 
-- CONTRIBUTING.md – Development workflow
-- VERSIONING.md – Release strategy
-- CHANGELOG.md – Release history
-- AGENTS.md – Instructions for AI coding agents
-- docs/ – Architecture and implementation guides
+- `STATUS.md` - Current project status, active phase, blockers, and the live auto-generated project tree
+- `PROJECT_CONTEXT.md` - Project purpose, learning philosophy, architecture overview, and completed/upcoming milestones
+- `AGENTS.md` - Working conventions for AI coding agents and documentation update rules
+- `CONTRIBUTING.md` - Development workflow
+- `VERSIONING.md` - Release strategy
+- `CHANGELOG.md` - Release history
+- `docs/` - Architecture and implementation guides
+
+If you want the latest project snapshot, start with `STATUS.md`. If you want the broader narrative and design direction, read `PROJECT_CONTEXT.md`.
 
 ## Roadmap
 
@@ -60,5 +47,3 @@ observability/
 6. Fraud Engine
 7. Observability
 8. Kubernetes
-
-See the `docs/` folder for detailed design and implementation guides.
