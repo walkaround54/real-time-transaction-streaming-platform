@@ -33,7 +33,7 @@ def main():
         sequence_number = 1
 
         while True:
-            publish_one_transaction(sequence_number)
+            publish_one_transaction(sequence_number, publisher)
             sequence_number += 1
             time.sleep(1 / TRANSACTIONS_PER_SECOND)
     finally:

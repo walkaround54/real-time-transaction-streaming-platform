@@ -44,7 +44,7 @@ Recommended local shape:
 - one application topic: `transactions_raw`
 - optional Kafka UI for inspection
 
-The first verification target is simple:
+The first verification target has now been completed:
 
 ```text
 Python producer -> transactions_raw -> consumer check
@@ -186,6 +186,8 @@ For the current `v0.3.0` milestone:
 - keep the producer code stable
 - add Kafka publishing around the existing transaction output
 - verify delivery with a consumer before moving on to Flink
+
+The producer-to-`transactions_raw` path has now been implemented and locally verified, so the Kafka milestone can be treated as complete for this phase of the project.
 
 ## Where RocksDB Fits
 

@@ -31,15 +31,15 @@ Treat each phase as a learning milestone rather than a coding exercise.
 
 Current Version
 
-v0.2.0
+v0.3.0
 
 Current Milestone
 
-Phase 3 - Kafka Producer
+Phase 4 - Apache Kafka cluster
 
 Current Feature
 
-Connecting the Python producer to Kafka and publishing transaction events
+Kafka publishing from the Python producer into `transactions_raw` has been implemented and verified locally
 
 ---
 
@@ -111,10 +111,13 @@ Transaction Factory
 Transaction Model
         |
         v
-Console Output (JSON)
+Kafka Producer
+        |
+        v
+Kafka Topic (`transactions_raw`)
 ```
 
-Current application consists of a single producer that continuously generates realistic financial transaction events.
+Current application consists of a single Python producer that continuously generates realistic financial transaction events and publishes them to Kafka.
 
 The producer is packaged using a standard Python src layout and a verified Docker runtime image:
 
@@ -137,7 +140,7 @@ producer/
 
 The runtime Docker image contains only the producer application code and its runtime dependencies, not the test suite.
 
-Kafka is now available locally through Docker Compose in KRaft mode, with a one-shot topic setup service that creates `transactions_raw` during startup.
+Kafka is now available locally through Docker Compose in KRaft mode, with a one-shot topic setup service that creates `transactions_raw` during startup. The Python producer has been verified against this broker and topic setup using a Kafka console consumer.
 
 ---
 
@@ -168,6 +171,8 @@ Producer
 - Application settings
 - Structured logging
 - Unit tests
+- Kafka publishing to `transactions_raw`
+- Local delivery verification with a Kafka console consumer
 
 Packaging / Build
 
@@ -177,6 +182,7 @@ Packaging / Build
 - Dockerized producer image verified with `docker run`
 - Kafka broker running successfully in KRaft mode
 - Topic provisioning for `transactions_raw` verified via Compose startup
+- Producer container verified on the shared Compose network
 
 ---
 
@@ -214,11 +220,13 @@ Logging
 - Python logging module.
 - Structured console logging.
 - Module-specific loggers.
+- Kafka publish logging for generated transactions
 
 Testing
 
 - Pytest.
 - Factory and generator unit tests.
+- Kafka publisher wrapper unit tests
 
 Packaging
 

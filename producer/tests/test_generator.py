@@ -9,9 +9,7 @@ def test_generate_one_transaction():
     assert transaction.account_id.startswith("ACC")
     assert transaction.amount > 0
 
-@patch("producer.generator.KafkaPublisher")
 @patch("producer.generator.create_transaction")
-
 def test_publish_one_transaction(mock_create_transaction):
     mock_transaction = MagicMock()
     mock_transaction.model_dump_json.return_value = '{"transaction_id":"TX00000001"}'
@@ -23,7 +21,7 @@ def test_publish_one_transaction(mock_create_transaction):
 
     mock_create_transaction.assert_called_once_with(1)
     mock_transaction.model_dump_json.assert_called_once()
-    mock_publisher.publisher.assert_called_once_with(
+    mock_publisher.publish.assert_called_once_with(
         value='{"transaction_id":"TX00000001"}',
         key="CUST00000001",        
     )

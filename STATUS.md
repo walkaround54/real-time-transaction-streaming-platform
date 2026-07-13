@@ -2,7 +2,7 @@
 
 Current Version
 
-v0.2.0
+v0.3.0
 
 Current Branch
 
@@ -10,23 +10,11 @@ feature/docker-environment
 
 ### Current Phase
 
-Phase 3 - Kafka Producer
+Phase 4 - Apache Kafka cluster
 
 ### Current Work
 
-Connecting the Python producer to Kafka and publishing transaction events
-
-#### Phase 3 Task Completion Status
-
-1. Define the Kafka producer integration
-2. Send simulated transactions to `transactions_raw`
-3. Add basic local verification for message delivery
-
-#### Phase 3 Infrastructure Tasks Completed
-
-1. Start Kafka in KRaft mode with Docker Compose
-2. Create `transactions_raw` via a one-shot topic setup service
-3. Verify the broker and topic setup startup successfully
+Preparing the Apache Kafka cluster milestone after completing and verifying the Kafka producer
 
 # Previous Phases Task Completion
 
@@ -49,9 +37,19 @@ Connecting the Python producer to Kafka and publishing transaction events
 2. Verify the producer runs inside Docker
 3. Keep tests outside the runtime image
 
+### Phase 3 Tasks:
+
+1. Define the Kafka producer integration
+2. Send simulated transactions to `transactions_raw`
+3. Add basic local verification for message delivery
+4. Start Kafka in KRaft mode with Docker Compose
+5. Create `transactions_raw` via a one-shot topic setup service
+6. Verify the broker and topic setup startup successfully
+7. Verify the producer publishes to `transactions_raw`
+
 Target Release
 
-v0.3.0
+v0.4.0
 
 Blockers
 
