@@ -18,6 +18,8 @@ class KafkaPublisher:
             print(
                 f"Delivery failed for topic={msg.topic()} "
                 f"partition={msg.partition()} offset={msg.offset()}: {err}"
+                # f"{dir(msg)}" 
+                # this will print all info
             )
 
     def publish(self, value:str, key: str | None = None) -> None:

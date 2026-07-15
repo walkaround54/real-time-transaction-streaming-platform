@@ -82,6 +82,7 @@ real-time-transaction-streaming-platform
 │   ├── kafka.md
 │   ├── observability.md
 │   ├── roadmap.md
+│   ├── streaming-concepts.md
 │   └── technologies.md
 ├── flink-jobs
 ├── kafka
