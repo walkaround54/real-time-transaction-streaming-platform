@@ -23,7 +23,7 @@ def test_publish_one_transaction(mock_create_transaction):
     mock_transaction.model_dump_json.assert_called_once()
     mock_publisher.publish.assert_called_once_with(
         value='{"transaction_id":"TX00000001"}',
-        key="CUST00000001",        
+        key="CUST00000001",       
     )
 
     assert transaction is mock_transaction

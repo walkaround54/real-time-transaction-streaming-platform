@@ -171,6 +171,32 @@ Before building Flink jobs, understand the main streaming concepts.
 
 These concepts are more important than the syntax of any single framework.
 
+### Build
+
+Create and document the processing contract for the first Flink job before writing the job itself.
+
+The contract should define:
+
+- `event_time` as the event-time field and UTC as its time zone
+- the difference between event time and processing time in this platform
+- a one-minute tumbling window for initial Flink validation and fast local feedback
+- an initial out-of-order tolerance and the handling of records that arrive after the watermark
+- how Kafka consumer groups, offsets, and replay support recovery and reprocessing
+- the difference between Kafka producer idempotence and Flink end-to-end exactly-once processing
+- how consumer lag and backpressure appear when processing cannot keep up with production
+- why realistic fraud detection will later need customer profiles and longer historical baselines
+
+### Exit Criteria
+
+- The concepts are documented against the existing `transactions_raw` topic.
+- A named consumer group has been used to inspect offsets and replay records.
+- The initial Flink input, output, keying, window, and late-event decisions are recorded.
+- The first Flink job can begin without revisiting the event-time and delivery assumptions.
+
+Refer to [Kafka](kafka.md) for Kafka-side concepts such as consumer groups, offsets, replay, producer guarantees, and lag.
+
+Refer to [Flink](flink.md) for Flink-side concepts such as event time, processing time, watermarks, windows, late events, checkpointing, and backpressure.
+
 ## Phase 5 — Real-Time Processing with Flink Java
 
 ### Goal
@@ -221,6 +247,8 @@ Flink Java Job
 Kafka: transactions_processed
 ```
 
+The first job uses a short one-minute window to make local validation easy. Later fraud detection should introduce longer horizons and customer history instead of relying on this first validation window alone.
+
 ## Phase 6 — Stateful Processing with RocksDB
 
 ### Goal
@@ -260,6 +288,7 @@ Implement:
 - Failed transaction count
 - Previous transaction country
 - Last transaction timestamp
+- Customer historical profile fields such as usual countries, usual channels, usual merchant categories, average transaction amount and weekly spend baseline
 
 ### Flow
 
@@ -290,6 +319,8 @@ Create alerts when:
 3. Customer has more than 3 failed transactions within 5 minutes.
 4. Customer transacts from two countries within a short time.
 5. Transaction amount is significantly higher than the customer's historical average.
+
+Fraud testing also requires the producer to generate explicit suspicious scenarios, not only random normal-looking transactions. Later producer scenarios should include high-value transactions, rapid repeated transactions, repeated failures, unusual countries, unusual merchant categories and sudden spend spikes.
 
 ### Output Topic
 
