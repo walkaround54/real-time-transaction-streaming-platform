@@ -149,7 +149,9 @@ Phase 4 streaming concept notes are split by system responsibility:
 
 The first Flink job contract uses a one-minute tumbling event-time window for fast local validation. This is not the final fraud detection horizon. Realistic fraud detection will later require customer historical profiles, longer baselines and explicit anomalous transaction generation.
 
-The `v0.4.0` milestone captures the streaming concepts and processing contract needed before implementation. The next release target is `v0.5.0`, where the first Flink job will read `transactions_raw`, key records by `customer_id`, assign event time from `event_time`, apply the initial one-minute validation window, and write aggregated results to `transactions_processed`.
+The project will use Apache Flink 2.2.1 for the first processing implementation. The primary learning and implementation path is the Java DataStream API. Flink SQL will be introduced later for KPI and analytics streams, while PyFlink is intentionally out of scope for now.
+
+The `v0.4.0` milestone captures the streaming concepts and processing contract needed before implementation. The next release target is `v0.5.0`, where the first Java DataStream Flink job will read `transactions_raw`, key records by `customer_id`, assign event time from `event_time`, apply the initial one-minute validation window, and write aggregated results to `transactions_processed`.
 
 ---
 
@@ -256,7 +258,7 @@ Packaging
 
 Phase 5
 
-- `v0.5.0` Apache Flink first processing job: consume `transactions_raw`, apply event-time processing and write validation aggregates to `transactions_processed`
+- `v0.5.0` Apache Flink 2.2.1 first Java DataStream processing job: consume `transactions_raw`, apply event-time processing and write validation aggregates to `transactions_processed`
 
 Phase 6
 

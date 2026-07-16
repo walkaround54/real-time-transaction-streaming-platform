@@ -4,6 +4,14 @@
 
 Apache Flink is the real-time stream processing engine of the platform.
 
+## Project Version And API Choice
+
+- Project Flink version: Apache Flink 2.2.1.
+- Primary implementation API: Java DataStream API.
+- First learning focus: Kafka source and sink, JSON parsing, event time, watermarks, keyed streams, windows and checkpointing.
+- Flink SQL will be introduced later for analytics and KPI-style streams after the first Java DataStream job is working.
+- PyFlink is intentionally out of scope for now so the project can focus on Flink's production-oriented Java APIs first.
+
 ## Responsibilities
 
 - Consume `transactions_raw`
@@ -13,6 +21,8 @@ Apache Flink is the real-time stream processing engine of the platform.
 - Produce processed transactions, alerts and KPI streams
 
 ## DataStream API
+
+The Java DataStream API is the primary API for the first Flink implementation.
 
 Key concepts:
 
@@ -37,6 +47,8 @@ State stored per customer:
 - Historical average amount
 
 ## Flink SQL
+
+Flink SQL is planned as a later addition for declarative analytics once the Java DataStream processing path is understood.
 
 Used for:
 
@@ -200,9 +212,12 @@ Use this section to define exactly what the first Flink job should do before imp
 
 ## Implementation Notes For Later
 
-- Java package/module location:
-- Kafka source connector needed:
-- Kafka sink connector needed:
+- Java package/module location: `flink-jobs`
+- Flink version: 2.2.1
+- Primary API: Java DataStream API
+- Kafka connector version: use the Kafka connector compatible with Flink 2.2.x
+- Kafka source connector needed: yes, for `transactions_raw`
+- Kafka sink connector needed: yes, for `transactions_processed`
 - JSON serialization/deserialization approach:
 - Local Docker Compose requirements:
 - Tests or verification commands:

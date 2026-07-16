@@ -14,7 +14,7 @@ Phase 5 - Flink processing
 
 ### Current Work
 
-Prepare to start the first Apache Flink job using the Kafka and Flink processing contract documented in Phase 4
+Prepare to start the first Apache Flink 2.2.1 Java DataStream job using the Kafka and Flink processing contract documented in Phase 4
 
 # Phase 5 Task Completion Status
 
@@ -71,7 +71,7 @@ Prepare to start the first Apache Flink job using the Kafka and Flink processing
 
 Target Release
 
-v0.5.0 - First Flink processing job
+v0.5.0 - First Flink Java DataStream processing job
 
 Blockers
 

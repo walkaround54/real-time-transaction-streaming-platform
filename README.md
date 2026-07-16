@@ -19,7 +19,7 @@
 |------|------------|
 | Producer | Python |
 | Streaming | Apache Kafka |
-| Processing | Apache Flink |
+| Processing | Apache Flink 2.2.1, Java DataStream API first, Flink SQL later |
 | State | RocksDB |
 | Containers | Docker |
 | Orchestration | Kubernetes |
