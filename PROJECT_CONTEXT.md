@@ -39,7 +39,7 @@ Phase 4 - Streaming concepts
 
 Current Feature
 
-Define the streaming concepts and processing contract required before implementing the first Apache Flink job
+Review the Kafka and Flink streaming concept decisions required before implementing the first Apache Flink job
 
 ---
 
@@ -142,6 +142,13 @@ The runtime Docker image contains only the producer application code and its run
 
 Kafka is now available locally through Docker Compose in KRaft mode, with a one-shot topic setup service that creates `transactions_raw` during startup. The Python producer has been verified against this broker and topic setup using a Kafka console consumer.
 
+Phase 4 streaming concept notes are split by system responsibility:
+
+- `docs/kafka.md` covers Kafka-side concepts such as consumer groups, offsets, replay, producer guarantees and consumer lag.
+- `docs/flink.md` covers Flink-side concepts such as event time, processing time, watermarks, windows, late events, checkpointing and backpressure.
+
+The first Flink job contract uses a one-minute tumbling event-time window for fast local validation. This is not the final fraud detection horizon. Realistic fraud detection will later require customer historical profiles, longer baselines and explicit anomalous transaction generation.
+
 ---
 
 Refer to STATUS.md for existing Project Tree structure.
@@ -240,7 +247,9 @@ Packaging
 
 Phase 4
 
-- Streaming concepts: event time, watermarks, windows, late events, checkpointing, delivery guarantees, and backpressure
+- Review Kafka and Flink streaming concepts before the first Flink job
+- Kafka-side notes live in `docs/kafka.md`
+- Flink-side notes and the first Flink processing contract live in `docs/flink.md`
 
 Phase 5
 

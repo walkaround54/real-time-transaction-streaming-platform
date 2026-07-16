@@ -22,6 +22,7 @@ def test_publish_sends_message_to_kafka(mock_producer_class):
         topic="transactions_raw",
         value='{"transaction_id":"TX00000001"}',
         key="CUST00000001",
+        callback=KafkaPublisher.delivery_report, 
     )
     mock_producer.poll.assert_called_once_with(0)
 

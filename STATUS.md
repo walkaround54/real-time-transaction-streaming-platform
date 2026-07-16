@@ -14,16 +14,21 @@ Phase 4 - Streaming concepts
 
 ### Current Work
 
-Define the streaming concepts and processing contract that will guide the first Apache Flink job
+Review Phase 4 streaming concept decisions before starting the first Apache Flink job
 
 # Phase 4 Task Completion Status
 
-1. Document event time and processing time for transaction events
-2. Define the initial windowing approach for transaction metrics
-3. Define a watermark and late-event handling policy
-4. Practise consumer groups, offsets, and replay with `transactions_raw`
-5. Document checkpointing, delivery guarantees, and backpressure concepts
-6. Define the input and output contract for the first Flink job
+1. Document event time and processing time for transaction events - documented in `docs/flink.md`
+2. Define the initial windowing approach for transaction metrics - documented in `docs/flink.md`
+3. Define a watermark and late-event handling policy - documented in `docs/flink.md`
+4. Practise consumer groups, offsets, and replay with `transactions_raw` - completed with Kafka CLI tools and documented in `docs/kafka.md`
+5. Document checkpointing, delivery guarantees, and backpressure concepts - documented across `docs/kafka.md` and `docs/flink.md`
+6. Define the input and output contract for the first Flink job - documented in `docs/flink.md`
+
+Phase 4 concept details now live in:
+
+- `docs/kafka.md` for Kafka-side concepts such as consumer groups, offsets, replay, producer guarantees and lag
+- `docs/flink.md` for Flink-side concepts such as event time, processing time, watermarks, windows, late events, checkpointing and backpressure
 
 # Previous Phases Task Completion
 
@@ -82,7 +87,6 @@ real-time-transaction-streaming-platform
 │   ├── kafka.md
 │   ├── observability.md
 │   ├── roadmap.md
-│   ├── streaming-concepts.md
 │   └── technologies.md
 ├── flink-jobs
 ├── kafka
