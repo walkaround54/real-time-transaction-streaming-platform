@@ -31,15 +31,15 @@ Treat each phase as a learning milestone rather than a coding exercise.
 
 Current Version
 
-v0.3.0
+v0.4.0
 
 Current Milestone
 
-Phase 4 - Streaming concepts
+Phase 4 - Streaming concepts and Flink processing contract
 
 Current Feature
 
-Review the Kafka and Flink streaming concept decisions required before implementing the first Apache Flink job
+Completed the Kafka and Flink streaming concept decisions required before implementing the first Apache Flink job
 
 ---
 
@@ -149,6 +149,8 @@ Phase 4 streaming concept notes are split by system responsibility:
 
 The first Flink job contract uses a one-minute tumbling event-time window for fast local validation. This is not the final fraud detection horizon. Realistic fraud detection will later require customer historical profiles, longer baselines and explicit anomalous transaction generation.
 
+The `v0.4.0` milestone captures the streaming concepts and processing contract needed before implementation. The next release target is `v0.5.0`, where the first Flink job will read `transactions_raw`, key records by `customer_id`, assign event time from `event_time`, apply the initial one-minute validation window, and write aggregated results to `transactions_processed`.
+
 ---
 
 Refer to STATUS.md for existing Project Tree structure.
@@ -190,6 +192,13 @@ Packaging / Build
 - Kafka broker running successfully in KRaft mode
 - Topic provisioning for `transactions_raw` verified via Compose startup
 - Producer container verified on the shared Compose network
+
+Streaming Concepts
+
+- Kafka-side consumer group, offset, replay, producer guarantee and lag concepts documented in `docs/kafka.md`
+- Flink-side event-time, processing-time, watermark, window, late-event, checkpointing and backpressure concepts documented in `docs/flink.md`
+- First Flink job input, output, keying, watermark and aggregation contract documented in `docs/flink.md`
+- Fraud roadmap updated to include customer profiles, longer historical baselines and explicit anomalous transaction generation
 
 ---
 
@@ -245,15 +254,9 @@ Packaging
 
 # Upcoming Milestones
 
-Phase 4
-
-- Review Kafka and Flink streaming concepts before the first Flink job
-- Kafka-side notes live in `docs/kafka.md`
-- Flink-side notes and the first Flink processing contract live in `docs/flink.md`
-
 Phase 5
 
-- Apache Flink
+- `v0.5.0` Apache Flink first processing job: consume `transactions_raw`, apply event-time processing and write validation aggregates to `transactions_processed`
 
 Phase 6
 

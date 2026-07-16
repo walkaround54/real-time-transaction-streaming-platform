@@ -2,7 +2,7 @@
 
 Current Version
 
-v0.3.0
+v0.4.0
 
 Current Branch
 
@@ -10,25 +10,22 @@ feature/kafka-cluster
 
 ### Current Phase
 
-Phase 4 - Streaming concepts
+Phase 5 - Flink processing
 
 ### Current Work
 
-Review Phase 4 streaming concept decisions before starting the first Apache Flink job
+Prepare to start the first Apache Flink job using the Kafka and Flink processing contract documented in Phase 4
 
-# Phase 4 Task Completion Status
+# Phase 5 Task Completion Status
 
-1. Document event time and processing time for transaction events - documented in `docs/flink.md`
-2. Define the initial windowing approach for transaction metrics - documented in `docs/flink.md`
-3. Define a watermark and late-event handling policy - documented in `docs/flink.md`
-4. Practise consumer groups, offsets, and replay with `transactions_raw` - completed with Kafka CLI tools and documented in `docs/kafka.md`
-5. Document checkpointing, delivery guarantees, and backpressure concepts - documented across `docs/kafka.md` and `docs/flink.md`
-6. Define the input and output contract for the first Flink job - documented in `docs/flink.md`
-
-Phase 4 concept details now live in:
-
-- `docs/kafka.md` for Kafka-side concepts such as consumer groups, offsets, replay, producer guarantees and lag
-- `docs/flink.md` for Flink-side concepts such as event time, processing time, watermarks, windows, late events, checkpointing and backpressure
+1. Scaffold the first Flink Java job project
+2. Add Kafka source for `transactions_raw`
+3. Parse transaction JSON events
+4. Assign event time and watermarks using `event_time`
+5. Key the stream by `customer_id`
+6. Add a one-minute tumbling event-time aggregation for first-job validation
+7. Publish aggregated output to `transactions_processed`
+8. Add local verification for the Flink processing flow
 
 # Previous Phases Task Completion
 
@@ -61,9 +58,20 @@ Phase 4 concept details now live in:
 6. Verify the broker and topic setup startup successfully
 7. Verify the producer publishes to `transactions_raw`
 
+### Phase 4 Tasks:
+
+1. Document event time and processing time for transaction events in `docs/flink.md`
+2. Define the initial one-minute validation window for transaction metrics in `docs/flink.md`
+3. Define the watermark tolerance and late-event policy in `docs/flink.md`
+4. Practise consumer groups, offsets and replay with `transactions_raw`
+5. Document checkpointing, delivery guarantees and backpressure across `docs/kafka.md` and `docs/flink.md`
+6. Define the first Flink input, output, keying and aggregation contract in `docs/flink.md`
+7. Split Phase 4 concept notes by system responsibility: Kafka details in `docs/kafka.md`, Flink details in `docs/flink.md`
+8. Clarify that realistic fraud detection will later require customer profiles, longer historical baselines and anomalous transaction generation
+
 Target Release
 
-v0.4.0 - First Flink processing job, after Phase 4 learning and design work
+v0.5.0 - First Flink processing job
 
 Blockers
 
