@@ -21,4 +21,7 @@ Thumbs.db
 # VS Code
 .vscode/
 
+# Maven / Java build output
+target/
+
 *.egg-info/

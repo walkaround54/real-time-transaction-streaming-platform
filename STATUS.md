@@ -14,11 +14,11 @@ Phase 5 - Flink processing
 
 ### Current Work
 
-Prepare to start the first Apache Flink 2.2.1 Java DataStream job using the Kafka and Flink processing contract documented in Phase 4
+Add the Kafka source for `transactions_raw` to the first Apache Flink 2.2.1 Java DataStream job
 
 # Phase 5 Task Completion Status
 
-1. Scaffold the first Flink Java job project
+1. Scaffold the first Flink Java job project - completed
 2. Add Kafka source for `transactions_raw`
 3. Parse transaction JSON events
 4. Assign event time and watermarks using `event_time`
@@ -97,6 +97,33 @@ real-time-transaction-streaming-platform
 │   ├── roadmap.md
 │   └── technologies.md
 ├── flink-jobs
+│   └── transaction-processor
+│       ├── src
+│       │   └── main
+│       │       └── java
+│       │           └── com
+│       │               └── transactionstreaming
+│       │                   └── flink
+│       │                       └── TransactionProcessorJob.java
+│       ├── target
+│       │   ├── classes
+│       │   │   └── com
+│       │   │       └── transactionstreaming
+│       │   │           └── flink
+│       │   │               └── TransactionProcessorJob.class
+│       │   ├── generated-sources
+│       │   │   └── annotations
+│       │   ├── maven-archiver
+│       │   │   └── pom.properties
+│       │   ├── maven-status
+│       │   │   └── maven-compiler-plugin
+│       │   │       └── compile
+│       │   │           └── default-compile
+│       │   │               ├── createdFiles.lst
+│       │   │               └── inputFiles.lst
+│       │   ├── test-classes
+│       │   └── transaction-processor-0.5.0-SNAPSHOT.jar
+│       └── pom.xml
 ├── kafka
 ├── kubernetes
 ├── observability
