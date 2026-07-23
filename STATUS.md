@@ -85,6 +85,7 @@ real-time-transaction-streaming-platform
 ├── .agents
 ├── .github
 ├── compose
+│   ├── flink.yml
 │   └── kafka.yml
 ├── docs
 │   ├── architecture.md
@@ -121,7 +122,7 @@ real-time-transaction-streaming-platform
 │       │   │           └── default-compile
 │       │   │               ├── createdFiles.lst
 │       │   │               └── inputFiles.lst
-│       │   ├── test-classes
+│       │   ├── original-transaction-processor-0.5.0-SNAPSHOT.jar
 │       │   └── transaction-processor-0.5.0-SNAPSHOT.jar
 │       └── pom.xml
 ├── kafka

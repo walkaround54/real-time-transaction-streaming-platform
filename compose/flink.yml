@@ -1,0 +1,28 @@
+services:
+  jobmanager:
+    image: flink:2.2.1-scala_2.12-java17
+    container_name: flink-jobmanager
+    command: jobmanager
+    ports:
+      - "8081:8081"
+    environment:
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: jobmanager
+        parallelism.default: 1
+
+  taskmanager:
+    image: flink:2.2.1-scala_2.12-java17
+    container_name: flink-taskmanager
+    command: taskmanager
+    depends_on:
+      - jobmanager
+    environment:
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 1
+        parallelism.default: 1
+
+networks:
+  default:
+    name: transaction-streaming-net
+    external: true

@@ -65,9 +65,14 @@ services:
       --partitions 1
       --replication-factor 1
       "
+    # the "--bootstrap..."" etc. are flags for the shell script
     restart: "no"
 
 volumes:
   broker-data: # named volume where kafka stores log and metadata files
   # volume and data survives container restarts
   # keeps broker state separate from container filesystem
+
+networks:
+  default:
+    name: transaction-streaming-net
