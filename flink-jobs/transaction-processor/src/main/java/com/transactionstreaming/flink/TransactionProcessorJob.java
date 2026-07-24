@@ -7,8 +7,6 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.WindowedStream;
@@ -31,15 +29,8 @@ public class TransactionProcessorJob {
         DataStream<String> rawTransactions = env
             .fromSource(source, WatermarkStrategy.noWatermarks(), "transactions-raw-source");
 
-        ObjectMapper objectMapper = new ObjectMapper()
-            .registerModule(new JavaTimeModule());
-
-        // ObjectValue methods:
-        // readValue() parses JSON into a Java object
-        // writeValue() write JSON to a file, stream
-        // convertValue() convert one Java Object into another Java type
         DataStream<TransactionEvent> transactions = rawTransactions
-            .map(eventString -> objectMapper.readValue(eventString,TransactionEvent.class));
+            .map(new TransactionEventParser());
         
         DataStream<TransactionEvent> transactionsWatermarked = transactions
             .assignTimestampsAndWatermarks(
