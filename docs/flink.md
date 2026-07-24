@@ -205,6 +205,64 @@ Use this section to record the Flink-side streaming concepts needed before build
 - The 1-minute window is not the final fraud detection horizon because real customers may not transact many times within one minute.
 - Later fraud detection should compare short-term behaviour against longer customer history, such as 1-day, 7-day, or 30-day baselines.
 
+### Window Aggregation Pattern
+
+The first transaction processor uses the common Flink pattern:
+
+```java
+keyedStream
+    .window(...)
+    .aggregate(
+        new TransactionAggregateFunction(),
+        new TransactionWindowFunction()
+    );
+```
+
+This combines two responsibilities:
+
+- `AggregateFunction` maintains running state while the window is open.
+- `ProcessWindowFunction` adds key and window metadata when the window emits.
+
+For this project:
+
+```text
+TransactionEvent
+        |
+        v
+TransactionAggregateAccumulator
+        |
+        v
+TransactionProcessed
+```
+
+`TransactionAggregateAccumulator` is temporary internal state. It stores running metrics such as transaction count, total amount, failed transaction count and failed transaction amount as events arrive.
+
+`TransactionAggregateFunction` tells Flink how to create an empty accumulator, add one `TransactionEvent` to the accumulator, return the completed accumulator and merge accumulators when required by the windowing strategy.
+
+`TransactionWindowFunction` runs when Flink is ready to emit a window result. It receives the customer key, the `TimeWindow` context and the aggregate result, then creates the final `TransactionProcessed` output event.
+
+Example flow for one customer and one one-minute event-time window:
+
+```text
+event 1: amount=20, status=SUCCESS
+event 2: amount=50, status=FAILED
+event 3: amount=30, status=PENDING
+
+accumulator while window is open:
+transaction_count=3
+total_amount=100
+failed_transaction_count=1
+failed_transaction_amount=50
+
+window function adds:
+customer_id
+window_start
+window_end
+average_amount=33.33
+```
+
+This pattern is preferred over processing all raw events in a single `ProcessWindowFunction` because Flink can keep compact aggregate state instead of storing every event in the window until it closes.
+
 ### Keying
 
 - `keyBy` groups related events so state and window calculations are scoped to each key.
