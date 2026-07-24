@@ -1,6 +1,7 @@
 package com.transactionstreaming.flink;
 
 public class TransactionAggregateAccumulator {
+    // mutable working state for window
     private long transactionCount;
     private double totalAmount;
     private long failedTransactionCount;

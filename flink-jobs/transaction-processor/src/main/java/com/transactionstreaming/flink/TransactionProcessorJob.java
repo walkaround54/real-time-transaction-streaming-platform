@@ -5,6 +5,7 @@ import org.apache.flink.connector.kafka.source.KafkaSource;
 import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -45,16 +46,22 @@ public class TransactionProcessorJob {
                 WatermarkStrategy.<TransactionEvent>forBoundedOutOfOrderness(Duration.ofSeconds(30))
             .withTimestampAssigner((transactionEvent, timestamp) -> transactionEvent.eventTime().toEpochMilli()));
         
-        transactionsWatermarked.print();
-        
         // KeyedStream<Original Stream Type, Key Type>
         KeyedStream<TransactionEvent, String> transactionsByCustomer = transactionsWatermarked
             .keyBy(transactionEvent -> transactionEvent.customerId());
         
         WindowedStream<TransactionEvent, String, TimeWindow> customerTransactionsByMinute = transactionsByCustomer
-                .window(TumblingEventTimeWindows.of(Time.minutes(1)))
-                .aggregate((event -> ))
+                .window(TumblingEventTimeWindows.of(Duration.ofMinutes(1)));
         
+        DataStream<TransactionProcessed> processedTransactions = customerTransactionsByMinute
+                .aggregate(
+                    new TransactionAggregateFunction(),
+                    new TransactionWindowFunction()
+                );
+        
+        processedTransactions.print();
+        // by default, a DataStream prints as it processes, and not all at once
+
         env.execute("transaction-processor");
     }
 }
