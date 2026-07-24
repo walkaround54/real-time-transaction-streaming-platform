@@ -36,6 +36,86 @@ Key concepts:
 - KeyedProcessFunction
 - Side Outputs
 
+## Typical Kafka To Flink Job Structure
+
+A typical Java DataStream job follows this shape:
+
+1. Create the `StreamExecutionEnvironment`.
+2. Configure job-level settings such as parallelism and checkpointing.
+3. Define a source, such as a Kafka source reading `transactions_raw`.
+4. Convert the source into a `DataStream`.
+5. Deserialize or parse records into typed event objects when needed.
+6. Assign event-time timestamps and watermarks.
+7. Use `keyBy` to group events by a business key such as `customer_id`.
+8. Apply stateless transformations, stateful processing, windows or aggregations.
+9. Define one or more sinks, such as Kafka output topics.
+10. Call `execute` to submit the job to the Flink runtime.
+
+For the first transaction processor, the initial flow is:
+
+```text
+StreamExecutionEnvironment
+        |
+        v
+KafkaSource<String>
+        |
+        v
+DataStream<String>
+        |
+        v
+map JSON string to TransactionEvent
+        |
+        v
+DataStream<TransactionEvent>
+        |
+        v
+assign event_time timestamps and watermarks
+        |
+        v
+keyBy customer_id
+```
+
+The source currently reads Kafka values as strings because the producer emits JSON text. The parsing step is kept as a separate `map` transformation so the job can first prove Kafka connectivity, then prove JSON parsing, then add event-time and keyed processing incrementally.
+
+## Event Formats
+
+Kafka stores record keys and values as bytes. Producers and consumers agree on how those bytes should be interpreted through a data contract.
+
+For this project, the current input format is JSON:
+
+- The Python producer serializes each transaction as JSON text.
+- Flink reads the Kafka value with `SimpleStringSchema`, producing a `DataStream<String>`.
+- Jackson parses each JSON string into a typed `TransactionEvent`.
+- This format is easy to inspect with Kafka console tools and is appropriate for the current learning phase.
+
+In larger production data platforms, high-value Kafka streams often use stronger event formats:
+
+- Avro: common with Schema Registry, supports explicit schemas and compatibility rules.
+- Protobuf: common when service contracts already use protocol buffers or compact binary payloads are useful.
+- Thrift: used in some older or company-specific data infrastructure.
+- JSON: still common for logs, webhooks, early-stage pipelines, lower-volume events and debugging-friendly streams.
+
+The Flink processing shape remains similar across formats:
+
+```text
+Kafka bytes
+        |
+        v
+deserialize to typed event
+        |
+        v
+DataStream<TransactionEvent>
+        |
+        v
+event-time processing, keying, windows, state and sinks
+```
+
+The main difference is where deserialization happens:
+
+- JSON learning path: `KafkaSource<String>` followed by a Jackson `map` into `TransactionEvent`.
+- Avro or Protobuf production path: Kafka source may deserialize directly into generated or schema-backed event classes.
+- Raw-byte path: `KafkaSource<byte[]>` followed by custom validation, parsing and dead-letter handling.
+
 ## Stateful Processing
 
 State stored per customer:
@@ -164,7 +244,7 @@ Use this section to define exactly what the first Flink job should do before imp
 - Output topic: `transactions_processed`
 - Output format: JSON
 - Output grain: per customer per one-minute window
-- Output fields: `customer_id`, `window_start`, `window_end`, `transaction_count`, `total_amount`, `average_amount`, `failed_transaction_count`
+- Output fields: `customer_id`, `window_start`, `window_end`, `transaction_count`, `total_amount`, `average_amount`, `failed_transaction_count`, `failed_transaction_amount`
 
 ### Example Output Event
 
@@ -176,7 +256,8 @@ Use this section to define exactly what the first Flink job should do before imp
   "transaction_count": 4,
   "total_amount": 1234.56,
   "average_amount": 308.64,
-  "failed_transaction_count": 1
+  "failed_transaction_count": 1,
+  "failed_transaction_amount": 125.00
 }
 ```
 
